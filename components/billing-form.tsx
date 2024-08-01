@@ -2,7 +2,7 @@
 
 import * as React from "react"
 
-import { UserSubscriptionPlan } from "types"
+import { UserSubscriptionPlan } from "@/types"
 import { cn, formatDate } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
 import {
@@ -29,7 +29,7 @@ export function BillingForm({
 }: BillingFormProps) {
   const [isLoading, setIsLoading] = React.useState<boolean>(false)
 
-  async function onSubmit(event) {
+  async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
     setIsLoading(!isLoading)
 
