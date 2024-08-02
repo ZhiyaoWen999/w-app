@@ -2,11 +2,11 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import localFont from "next/font/local";
 import { siteConfig } from "@/config/site"
-import { absoluteUrl, cn } from "@/lib/utils"
-import { Analytics } from "@/components/Analytics";
+import { cn } from "@/lib/utils"
+import { Analytics } from "@/components/analytics";
 import { Toaster } from "react-hot-toast";
 import { ThemeProvider } from "next-themes";
-import { TailwindIndicator } from "@/components/TailwindIndicator";
+import { TailwindIndicator } from "@/components/tailwind-indicator";
 import "./globals.css";
 
 
@@ -40,15 +40,12 @@ export const metadata = {
   ],
   authors: [
     {
-      name: "shadcn",
-      url: "https://shadcn.com",
+      name: "Zhiyao Wen",
+      url: "https://github.com/ZhiyaoWen999",
     },
   ],
-  creator: "shadcn",
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "white" },
-    { media: "(prefers-color-scheme: dark)", color: "black" },
-  ],
+  creator: "Zhiyao Wen",
+
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -62,7 +59,7 @@ export const metadata = {
     title: siteConfig.name,
     description: siteConfig.description,
     images: [`${siteConfig.url}/og.jpg`],
-    creator: "@shadcn",
+    creator: "@Zhiyao Wen",
   },
   icons: {
     icon: "/favicon.ico",
@@ -71,6 +68,13 @@ export const metadata = {
   },
   manifest: `${siteConfig.url}/site.webmanifest`,
 }
+
+export const viewport = {
+    themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "white" },
+    { media: "(prefers-color-scheme: dark)", color: "black" },
+  ],
+};
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
