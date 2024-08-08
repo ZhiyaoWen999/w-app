@@ -3,6 +3,7 @@ import Link from "next/link"
 import { Icons } from "@/components/icons"
 import { UserAuthForm } from "@/components/user-auth-form"
 
+
 export default function RegisterPage() {
   return (
     <div className="grid h-screen w-screen grid-cols-2 flex-col items-center justify-center">
