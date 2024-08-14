@@ -24,9 +24,9 @@ import {
   User,
   X,
   type Icon as LucideIcon,
-} from "lucide-react"
+} from "lucide-react";
 
-export type Icon = typeof LucideIcon
+export type Icon = typeof LucideIcon;
 
 export const Icons = {
   logo: Command,
@@ -69,5 +69,48 @@ export const Icons = {
   ),
   twitter: Twitter,
   check: Check,
-}
-
+  customIcon: ({ ...props }: LucideProps) => (
+    <svg
+      width="100"
+      height="100"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 200 200"
+      {...props}
+    >
+      {/* W Shape */}
+      <path
+        d="M60,150 Q50,100 70,60 Q100,100 130,60 Q150,100 140,150"
+        fill="#A580FF"
+        stroke="#000"
+        strokeWidth="4"
+      />
+      {/* Eyes */}
+      <circle cx="85" cy="110" r="5" fill="#000" />
+      <circle cx="115" cy="110" r="5" fill="#000" />
+      {/* Blush */}
+      <circle cx="75" cy="120" r="5" fill="#FF88AA" />
+      <circle cx="125" cy="120" r="5" fill="#FF88AA" />
+      {/* Mouth */}
+      <path
+        d="M90,130 Q100,140 110,130"
+        stroke="#000"
+        strokeWidth="4"
+        fill="transparent"
+      />
+      {/* Camera Accessory */}
+      <rect
+        x="30"
+        y="35"
+        width="30"
+        height="30"
+        rx="10"
+        ry="10"
+        fill="#D29B6E"
+        stroke="#000"
+        strokeWidth="4"
+      />
+      <circle cx="65" cy="50" r="10" fill="#FFF5CC" stroke="#000" strokeWidth="4" />
+      <circle cx="65" cy="50" r="5" fill="#FFD400" />
+    </svg>
+  ),
+};

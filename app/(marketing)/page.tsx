@@ -1,23 +1,44 @@
 import Link from 'next/link';
 import { siteConfig } from '@/config/site';
 import { Commentslist } from '@/components/commentslist';
+import { NeonGradientCard } from '@/components/neon-gradient-card';
+import { ArrowRightIcon } from "@radix-ui/react-icons";
+import { cn } from "@/lib/utils";
+import AnimatedShinyText from "@/components/animated-shiny-text";
 
 export default function Page() {
   return (
     <>
-    <section className="container mx-auto py-8 md:py-12 lg:py-24">
-      <div className="container mx-auto py-8 md:py-12 lg:py-24">
+    <section className="container mx-auto py-8 md:py-10 lg:py-1">
+      <div className="container mx-auto py-8 md:py-10 lg:py-1">
         <div className="mx-auto text-center md:max-w-[58rem]">
-          <p className="leading-normal text-muted-foreground sm:text-lg sm:leading-7">
+          <div className="z-10 flex min-h-[16rem] items-center justify-center">
+          <div
+            className={cn(
+              "group rounded-full border border-black/5 bg-neutral-100 text-base text-white transition-all ease-in hover:cursor-pointer hover:bg-neutral-200 dark:border-white/5 dark:bg-neutral-900 dark:hover:bg-neutral-800",
+            )}
+          >
+            <AnimatedShinyText className="inline-flex items-center justify-center px-4 py- transition ease-out hover:text-neutral-600 hover:duration-300 hover:dark:text-neutral-400">
+              <span><Link href={siteConfig.links.github}>✨ Introducing w-app</Link></span>
+              <ArrowRightIcon className="ml-1 size-3 transition-transform duration-300 ease-in-out group-hover:translate-x-0.5" />
+            </AnimatedShinyText>
+          </div>
+        </div>
+          <NeonGradientCard >
+            <span className="pointer-events-none z-10 h-full whitespace-pre-wrap bg-gradient-to-br from-[#ff2975] from-35% to-[#00FFF1] bg-clip-text text-center text-6xl font-bold leading-none tracking-tighter text-transparent dark:drop-shadow-[0_5px_5px_rgba(0,0,0,0.8)]">
+              w-app
+            </span>
+          </NeonGradientCard>
+          <p className="px-20 leading-normal text-muted-foreground sm:text-lg sm:leading-7 py-14">
             w-app also includes a blog and a full-featured documentation site
             built using Contentlayer and MDX. Our goal is to provide a seamless
             experience for developers to access and contribute to our project.
           </p>
-        </div>
+          </div>
       </div>
     </section>
 
-      <section id="open-source" className="container mx-auto py-8 md:py-12 lg:py-24">
+      <section id="open-source" className="container mx-auto py-8 md:py-12 lg:py-20">
         <div className="mx-auto flex max-w-[58rem] flex-col items-center justify-center gap-4 text-center">
           <h2 className="font-heading text-3xl leading-[1.1] sm:text-3xl md:text-6xl">
             Proudly Open Source
