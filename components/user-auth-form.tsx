@@ -101,9 +101,15 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
       <button
         type="button"
         className={cn(buttonVariants({ variant: "outline" }))}
-        onClick={() => {
+        onClick={async () => {
           setIsGitHubLoading(true)
-          signIn("github")
+          
+          signIn("github", {
+            redirect: true,
+            callbackUrl: "http://localhost:3000/dashboard",
+          }).catch((error: any) => {
+            console.error("GitHub signIn error:", error);
+          });
         }}
         disabled={isLoading || isGitHubLoading}
       >

@@ -14,6 +14,16 @@ export default async function MarketingLayout({
   children,
 }: MarketingLayoutProps) {
   return (
+  // add current user after adding database and suspense. 
+  //   const user = await getCurrentUser();
+  // return (
+  //   <div className="flex min-h-screen flex-col">
+  //     <Suspense fallback="...">
+  //       <NavBar
+  //         items={
+  //           (await getMarketingConfig({ params: { lang: `${lang}` } })).mainNav
+  //         }
+
     <div className="flex min-h-screen flex-col">
       <header className="container z-40 bg-background">
         <div className="flex h-20 items-center justify-between py-6">
