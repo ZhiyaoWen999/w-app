@@ -5,6 +5,8 @@ import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
 import { MainNav } from "@/components/main-nav"
 import { SiteFooter } from "@/components/site-footer"
+import { getCurrentUser } from "@/lib/session";
+import { UserAccountNav } from "@/components/user-account-nav";
 
 interface MarketingLayoutProps {
   children: React.ReactNode
@@ -13,6 +15,7 @@ interface MarketingLayoutProps {
 export default async function MarketingLayout({
   children,
 }: MarketingLayoutProps) {
+  const user = await getCurrentUser();
   return (
   // add current user after adding database and suspense. 
   //   const user = await getCurrentUser();
@@ -29,6 +32,9 @@ export default async function MarketingLayout({
         <div className="flex h-20 items-center justify-between py-6">
           <MainNav items={marketingConfig.mainNav} />
           <nav>
+              {user ? (
+            <UserAccountNav user={user} />
+          ) : (
             <Link
               href="/login"
               className={cn(
@@ -38,6 +44,7 @@ export default async function MarketingLayout({
             >
               Login
             </Link>
+          )}
           </nav>
         </div>
       </header>
