@@ -3,11 +3,11 @@ import { PrismaAdapter } from "@auth/prisma-adapter";
 
 import {NextAuthOptions , type DefaultSession } from "next-auth";
 import GitHub from "next-auth/providers/github"
-import { prisma } from "@/lib/db";
+import { db } from "@/lib/db";
 import { getUserById } from "@/lib/user";
 
 export const authOptions: NextAuthOptions = {
-  adapter: PrismaAdapter(prisma) as any,
+  adapter: PrismaAdapter(db) as any,
   session: { strategy: "jwt" },
   pages: {
     signIn: "/login",
@@ -15,39 +15,36 @@ export const authOptions: NextAuthOptions = {
   },
   callbacks: {
     async session({ token, session }) {
-      if (session.user) {
-        if (token.sub) {
-          session.user.id = token.sub;
-        }
-
-        if (token.email) {
-          session.user.email = token.email;
-        }
-
-        if (token.role) {
-          session.user.role = token.role;
-        }
-
-        session.user.name = token.name;
-        session.user.image = token.picture;
+      if (token) {
+        session.user.id = token.id
+        session.user.name = token.name
+        session.user.email = token.email
+        session.user.image = token.picture
       }
 
-      return session;
+      return session
     },
 
-    async jwt({ token }) {
-      if (!token.sub) return token;
+    async jwt({ token, user }) {
+      const dbUser = await db.user.findFirst({
+        where: {
+          email: token.email,
+        },
+      })
 
-      const dbUser = await getUserById(token.sub);
+      if (!dbUser) {
+        if (user) {
+          token.id = user?.id
+        }
+        return token
+      }
 
-      if (!dbUser) return token;
-
-      token.name = dbUser.name;
-      token.email = dbUser.email;
-      token.picture = dbUser.image;
-      token.role = dbUser.role;
-
-      return token;
+      return {
+        id: dbUser.id,
+        name: dbUser.name,
+        email: dbUser.email,
+        picture: dbUser.image,
+      }
     },
   },
   providers: [

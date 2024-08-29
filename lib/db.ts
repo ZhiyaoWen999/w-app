@@ -1,12 +1,11 @@
 import { PrismaClient } from "@prisma/client"
-import "server-only";
 
 declare global {
   // eslint-disable-next-line no-var
   var cachedPrisma: PrismaClient
 }
 
-export let prisma: PrismaClient
+let prisma: PrismaClient
 if (process.env.NODE_ENV === "production") {
   prisma = new PrismaClient()
 } else {
@@ -15,3 +14,5 @@ if (process.env.NODE_ENV === "production") {
   }
   prisma = global.cachedPrisma
 }
+
+export const db = prisma
