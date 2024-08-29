@@ -4,7 +4,7 @@ import { PrismaAdapter } from "@auth/prisma-adapter";
 import {NextAuthOptions , type DefaultSession } from "next-auth";
 import GitHub from "next-auth/providers/github"
 import { db } from "@/lib/db";
-import { getUserById } from "@/lib/user";
+
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(db) as any,
@@ -25,25 +25,39 @@ export const authOptions: NextAuthOptions = {
       return session
     },
 
-    async jwt({ token, user }) {
-      const dbUser = await db.user.findFirst({
+    async jwt({ token, user, account }) {
+      if (account && user) {
+        return {
+          ...token,
+          id: user.id,
+        }
+      }
+    
+      const dbUser = await db.user.findUnique({
         where: {
-          email: token.email,
+          email: token.email!,
+        },
+        select: {
+          id: true,
+          name: true,
+          email: true,
+          image: true,
+          stripeSubscriptionId: true,
+          stripePriceId: true,
         },
       })
-
+    
       if (!dbUser) {
-        if (user) {
-          token.id = user?.id
-        }
         return token
       }
-
+    
       return {
         id: dbUser.id,
         name: dbUser.name,
         email: dbUser.email,
         picture: dbUser.image,
+        stripeSubscriptionId: dbUser.stripeSubscriptionId,
+        stripePriceId: dbUser.stripePriceId,
       }
     },
   },
@@ -55,3 +69,4 @@ export const authOptions: NextAuthOptions = {
   ],
   // debug: process.env.NODE_ENV !== "production"
 };
+
