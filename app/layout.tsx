@@ -43,7 +43,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         fontHeading.variable
       )}
     >
-      <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+      <ThemeProvider attribute="class" defaultTheme="system" enableSystem={true}>
         {children}
         <Analytics />
         <Toaster />

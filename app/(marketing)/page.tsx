@@ -30,7 +30,7 @@ export default function Page() {
             </span>
           </NeonGradientCard>
           <p className="px-20 leading-normal text-muted-foreground sm:text-lg sm:leading-7 py-14">
-            w-app also includes a blog and a full-featured documentation site
+            w-app is a Next.js starter or boilerplate that also includes a blog and a full-featured documentation site
             built using Contentlayer and MDX. Our goal is to provide a seamless
             experience for developers to access and contribute to our project.
           </p>
@@ -38,7 +38,7 @@ export default function Page() {
       </div>
     </section>
 
-      <section id="open-source" className="container mx-auto py-8 md:py-12 lg:py-20">
+      {/* <section id="open-source" className="container mx-auto py-8 md:py-12 lg:py-20">
         <div className="mx-auto flex max-w-[58rem] flex-col items-center justify-center gap-4 text-center">
           <h2 className="font-heading text-3xl leading-[1.1] sm:text-3xl md:text-6xl">
             Proudly Open Source
@@ -79,7 +79,7 @@ export default function Page() {
             and connect with other contributors.
           </p>
         </div>
-      </section>
+      </section> */}
       
       <section className="w-full px-8 pt-10 sm:px-0 sm:pt-0 md:px-0 md:pt-0 xl:px-0 xl:pt-0">
         <div className="flex h-full w-full flex-col items-center pb-[100px] pt-10">
